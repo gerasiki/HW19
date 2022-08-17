@@ -3,7 +3,7 @@ from flask_restx import Resource, Namespace
 
 from dao.model.director import DirectorSchema
 from implemented import director_service
-from requireds import auth_required, admin_required
+from requires import auth_required, admin_required
 
 director_ns = Namespace('directors')
 

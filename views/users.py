@@ -20,7 +20,7 @@ class UsersView(Resource):
         return '', 201, {"location": f"/users/{user.id}"}
 
 
-@user_ns.route('<int:uid>')
+@user_ns.route('/<int:uid>')
 class UserView(Resource):
     def get(self, uid):
         user = user_service.get_one(uid)
