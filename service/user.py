@@ -29,15 +29,15 @@ class UserService:
         self.dao.update(user_d)
 
     def make_user_password_hash(self, password):
-        return hashlib.pbkdf2_hmac(
+        return base64.b64encode(hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),
             PWD_HASH_SALT,
             PWD_HASH_ITERATIONS
-        ).decode("utf-8", "ignore")
+        ))
 
-    def compare_passwords(self, pass_hash, user_pass):
+    def compare_passwords(self, right_password_hash, user_pass):
         return hmac.compare_digest(
-            base64.b64decode(pass_hash),
-            hashlib.pbkdf2_hmac('sha256', user_pass.encode(), PWD_HASH_SALT, PWD_HASH_ITERATIONS)
-        )
+            base64.b64decode(right_password_hash),
+            hashlib.pbkdf2_hmac('sha256', user_pass.encode('utf-8'), PWD_HASH_SALT, PWD_HASH_ITERATIONS))
+

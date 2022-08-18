@@ -13,12 +13,13 @@ class AuthService:
 
     def create_tokens(self, username, password, is_refresh=False):
         user = self.user_service.get_one_by_name(username)
+        pass_hash = self.user_service.make_user_password_hash(user.password)
 
         if user is None:
             raise Exception()
 
         if not is_refresh:
-            if not self.user_service.compare_passwords(user.password, password):
+            if not self.user_service.compare_passwords(pass_hash, password):
                 raise Exception()
 
         data = {

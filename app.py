@@ -39,10 +39,9 @@ def register_extensions(app):
 #             db.session.add_all([u1, u2, u3])
 #
 
-
-app = create_app(Config)
+app = create_app(Config())
 app.debug = True
 # # create_data(app, db)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+app.run(debug=True, host='localhost', port=10001)

@@ -16,7 +16,7 @@ class AuthView(Resource):
         if None in [username, password]:
             return '', 400
 
-        tokens = auth_service.create_tokens(username, password)
+        tokens = auth_service.create_tokens(username=username, password=password)
 
         return tokens, 201
 

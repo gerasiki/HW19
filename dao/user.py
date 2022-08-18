@@ -27,8 +27,9 @@ class UserDAO:
 
     def update(self, user_d):
         user = self.get_one(user_d.get("id"))
-        user.name = user.get("name")
+        user.username = user_d.get("username")
         user.password = user_d.get("password")
+        user.role = user_d.get("role")
 
         self.session.add(user)
         self.session.commit()
